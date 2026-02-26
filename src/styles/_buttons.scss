@@ -1,0 +1,32 @@
+.app-btn {
+  padding: 0.6rem 2rem;
+  border-radius: 8px;
+  font-weight: 500;
+  font-size: 0.95rem;
+  transition: all 0.2s ease;
+  cursor: pointer;
+  border: 2px solid transparent;
+
+  &--primary {
+    background-color: var(--color-primary);
+    color: var(--white);
+    border-color: var(--color-primary);
+
+    &:hover {
+      background-color: var(--color-primary-light);
+      border-color: var(--color-primary-light);
+      box-shadow: 0 4px 12px rgba(0, 93, 185, 0.3);
+    }
+  }
+
+  &--outline {
+    background-color: transparent;
+    color: var(--color-primary);
+    border-color: var(--color-primary);
+
+    &:hover {
+      background-color: var(--color-primary);
+      color: var(--white);
+    }
+  }
+}
