@@ -1,22 +1,26 @@
-<section class="welcome">
-  <div class="welcome__content">
-    <div class="welcome__img-wrapper">
-      <img
-        src="images/profile-img.png"
-        alt="Perfil de visitante"
-        class="welcome__img"
-      />
-      <div class="welcome__img-ring"></div>
-      <div class="welcome__img-pulse"></div>
+@if (loading()) {
+  <app-loader [show]="true" />
+} @else {
+  <section class="welcome">
+    <div class="welcome__content">
+      <div class="welcome__img-wrapper">
+        <img
+          src="images/profile-img.png"
+          alt="Perfil de visitante"
+          class="welcome__img"
+        />
+        <div class="welcome__img-ring"></div>
+        <div class="welcome__img-pulse"></div>
+      </div>
+
+      <p class="welcome__greeting">Bienvenido</p>
+      <h1 class="welcome__title">{{ welcome() }}</h1>
+      <span class="welcome__version">{{ version() }}</span>
+
+      <button appButton variant="primary" class="welcome__btn" (click)="continue()">
+        Continuar
+        <span class="welcome__btn-arrow">&rarr;</span>
+      </button>
     </div>
-
-    <p class="welcome__greeting">Bienvenido</p>
-    <h1 class="welcome__title">{{ welcome() }}</h1>
-    <span class="welcome__version">{{ version() }}</span>
-
-    <button appButton variant="primary" class="welcome__btn" (click)="continue()">
-      Continuar
-      <span class="welcome__btn-arrow">&rarr;</span>
-    </button>
-  </div>
-</section>
+  </section>
+}
