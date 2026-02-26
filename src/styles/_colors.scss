@@ -1,0 +1,32 @@
+// GAPSI Brand Colors
+// Extracted from gapsi.com.mx
+
+:root {
+  // Primary
+  --blue-primary: #005db9;
+  --blue-dark: #0053a5;
+  --blue-light: #0088cc;
+  --blue-link: #045db5;
+
+  // Neutrals
+  --white: #ffffff;
+  --gray-100: #f0f0ed;
+  --gray-200: #ededed;
+  --gray-300: #d6d6d6;
+  --gray-400: #999999;
+  --gray-500: #777777;
+  --gray-600: #5b5b5b;
+  --gray-800: #171717;
+  --black: #000000;
+
+  // Semantic
+  --color-primary: var(--blue-primary);
+  --color-primary-dark: var(--blue-dark);
+  --color-primary-light: var(--blue-light);
+  --color-text: var(--gray-500);
+  --color-text-dark: var(--gray-800);
+  --color-text-muted: var(--gray-400);
+  --color-background: var(--white);
+  --color-background-alt: var(--gray-100);
+  --color-border: var(--gray-200);
+}
