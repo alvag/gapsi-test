@@ -1,0 +1,74 @@
+.header {
+  background-color: var(--white);
+  padding: 0.5rem 0;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+
+  &__logo {
+    height: 40px;
+  }
+
+  &__profile {
+    position: relative;
+  }
+
+  &__avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+    object-fit: cover;
+    background-color: var(--white);
+  }
+
+  &__card {
+    position: absolute;
+    top: calc(100% + 8px);
+    right: 0;
+    background: var(--white);
+    border-radius: 12px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+    min-width: 220px;
+    z-index: 1000;
+    overflow: hidden;
+  }
+
+  &__card-banner {
+    height: 48px;
+    background: linear-gradient(135deg, var(--blue-primary), var(--blue-light));
+  }
+
+  &__card-body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 0 1.25rem 1.25rem;
+    margin-top: -32px;
+  }
+
+  &__card-img {
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-bottom: 0.75rem;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+    border: 3px solid var(--white);
+  }
+
+  &__card-name {
+    font-weight: 500;
+    font-size: 0.95rem;
+    color: var(--gray-800);
+    margin: 0 0 0.5rem;
+  }
+
+  &__card-badge {
+    font-size: 0.75rem;
+    color: var(--blue-primary);
+    background-color: rgba(0, 93, 185, 0.08);
+    padding: 0.2rem 0.75rem;
+    border-radius: 12px;
+    font-weight: 500;
+  }
+}
