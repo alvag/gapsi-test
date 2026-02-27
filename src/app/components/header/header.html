@@ -1,29 +1,74 @@
 <header class="header">
   <div class="container d-flex align-items-center justify-content-between">
-    <img src="images/logo.png" alt="GAPSI Logo" class="header__logo" />
+    <a routerLink="/" class="header__logo-link">
+      <img src="images/logo.png" alt="GAPSI Logo" class="header__logo" />
+    </a>
 
-    <div class="header__profile">
-      <img
-        src="images/profile-img.png"
-        alt="Avatar de usuario"
-        class="header__avatar"
-        (click)="toggleProfileCard()"
-      />
+    <div class="d-flex align-items-center">
+      <div class="header__cart" (click)="toggleCartDropdown()">
+        <i class="fa-solid fa-cart-shopping header__cart-icon"></i>
+        @if (cartCount() > 0) {
+          <span class="header__cart-badge">{{ cartCount() }}</span>
+        }
 
-      @if (showProfileCard()) {
-        <div class="header__card">
-          <div class="header__card-banner"></div>
-          <div class="header__card-body">
-            <img
-              src="images/profile-img.png"
-              alt="Avatar de usuario"
-              class="header__card-img"
-            />
-            <p class="header__card-name">{{ welcome() }}</p>
-            <span class="header__card-badge">{{ version() }}</span>
+        @if (showCartDropdown()) {
+          <div class="header__cart-dropdown">
+            @if (cartItems().length === 0) {
+              <p class="header__cart-empty">Tu carrito está vacío</p>
+            } @else {
+              <ul class="header__cart-list">
+                @for (item of cartItems(); track item.sku) {
+                  <li class="header__cart-item">
+                    <img [src]="'images/products' + item.image" [alt]="item.name" class="header__cart-item-img" />
+                    <div class="header__cart-item-info">
+                      <span class="header__cart-item-name">{{ item.name }}</span>
+                      <span class="header__cart-item-price">{{ item.price | currency }}</span>
+                    </div>
+                    <button
+                      class="header__cart-item-remove"
+                      (click)="onRemoveFromCart(item.sku); $event.stopPropagation()"
+                    >
+                      <i class="fa-solid fa-xmark"></i>
+                    </button>
+                  </li>
+                }
+              </ul>
+              <div class="header__cart-total">
+                <span>Total</span>
+                <span>{{ cartTotal() | currency }}</span>
+              </div>
+            }
           </div>
-        </div>
-      }
+        }
+      </div>
+
+      <button class="header__reset" (click)="onReset()">
+        <i class="fa-solid fa-rotate-right"></i>
+      </button>
+
+      <div class="header__profile">
+        <img
+          src="images/profile-img.png"
+          alt="Avatar de usuario"
+          class="header__avatar"
+          (click)="toggleProfileCard()"
+        />
+
+        @if (showProfileCard()) {
+          <div class="header__card">
+            <div class="header__card-banner"></div>
+            <div class="header__card-body">
+              <img
+                src="images/profile-img.png"
+                alt="Avatar de usuario"
+                class="header__card-img"
+              />
+              <p class="header__card-name">{{ welcome() }}</p>
+              <span class="header__card-badge">{{ version() }}</span>
+            </div>
+          </div>
+        }
+      </div>
     </div>
   </div>
 </header>
