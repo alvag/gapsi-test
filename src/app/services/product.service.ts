@@ -2,6 +2,7 @@ import { computed, inject, Injectable, signal } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../environments/environment';
 import { Product, ProductsResponse } from '../interfaces/product.interface';
+import { ProductAdapter } from '../adapters/product.adapter';
 
 @Injectable({ providedIn: 'root' })
 export class ProductService {
@@ -17,7 +18,7 @@ export class ProductService {
     this._loading.set(true);
     this.http.get<ProductsResponse>(`${environment.apiUrl}/products`).subscribe({
       next: (res) => {
-        this._products.set(res.data.products.map((p) => ({ ...p, addedToCart: false })));
+        this._products.set(ProductAdapter.fromResponse(res));
         this._loading.set(false);
       },
       error: () => this._loading.set(false),

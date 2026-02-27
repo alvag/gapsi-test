@@ -10,6 +10,7 @@ import { CartService } from '../../services/cart.service';
 import { ProductCard } from '../../components/product-card/product-card';
 import { DragAndDropCart } from '../../components/drag-and-drop-cart/drag-and-drop-cart';
 import { Loader } from '../../components/loader/loader';
+import { SORT_STRATEGIES, SORT_OPTIONS, SortKey } from '../../strategies/sort.strategy';
 
 @Component({
   selector: 'app-products',
@@ -31,10 +32,19 @@ export class Products implements OnInit {
   private readonly cartService = inject(CartService);
   private readonly destroyRef = inject(DestroyRef);
 
-  protected readonly products = this.productService.products;
   protected readonly loading = this.productService.loading;
   protected readonly cartItems = this.cartService.items;
   protected readonly cartCount = this.cartService.count;
+
+  protected readonly sortKey = signal<SortKey>('default');
+  protected readonly sortOptions = SORT_OPTIONS;
+
+  // Patrón Strategy: aplica la estrategia de ordenamiento seleccionada
+  protected readonly products = computed(() => {
+    const list = this.productService.products();
+    const strategy = SORT_STRATEGIES[this.sortKey()];
+    return [...list].sort(strategy);
+  });
 
   protected readonly columns = signal(3);
   protected readonly rowHeight = 400;
@@ -53,6 +63,11 @@ export class Products implements OnInit {
   ngOnInit() {
     this.productService.getProducts();
     this.setupBreakpoints();
+  }
+
+  onSortChange(event: Event) {
+    const value = (event.target as HTMLSelectElement).value as SortKey;
+    this.sortKey.set(value);
   }
 
   onAddToCart(sku: string) {

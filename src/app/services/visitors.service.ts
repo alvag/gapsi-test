@@ -2,6 +2,7 @@ import { inject, Injectable, signal } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../environments/environment';
 import { VisitorData, VisitorResponse } from '../interfaces/visitor.interface';
+import { VisitorAdapter } from '../adapters/visitor.adapter';
 
 @Injectable({ providedIn: 'root' })
 export class VisitorsService {
@@ -16,7 +17,7 @@ export class VisitorsService {
     this._loading.set(true);
     this.http.post<VisitorResponse>(`${environment.apiUrl}/visitors`, {}).subscribe({
       next: (res) => {
-        this._visitor.set(res.data);
+        this._visitor.set(VisitorAdapter.fromResponse(res));
         this._loading.set(false);
       },
       error: () => this._loading.set(false),

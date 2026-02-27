@@ -9,6 +9,15 @@
       (drop)="onAddToCart($event)"
       (remove)="onRemoveFromCart($event)"
     />
+    <div class="products__toolbar">
+      <label class="products__sort-label" for="sort-select">Ordenar por:</label>
+      <select class="products__sort-select" id="sort-select" (change)="onSortChange($event)">
+        @for (option of sortOptions; track option.key) {
+          <option [value]="option.key">{{ option.label }}</option>
+        }
+      </select>
+    </div>
+
     @if (products().length === 0) {
       <div class="products__empty">
         <i class="fa-solid fa-box-open products__empty-icon"></i>
