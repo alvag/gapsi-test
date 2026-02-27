@@ -20,6 +20,6 @@ export class Welcome {
   protected readonly version = computed(() => this.visitor()?.version ?? '');
 
   continue() {
-    // TODO: navegar a la siguiente ruta
+    this.router.navigate(['/products']);
   }
 }

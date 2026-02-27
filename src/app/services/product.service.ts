@@ -9,6 +9,7 @@ export class ProductService {
   private readonly _products = signal<Product[]>([]);
   private readonly _loading = signal(false);
 
+  readonly allProducts = this._products.asReadonly();
   readonly products = computed(() => this._products().filter((p) => !p.addedToCart));
   readonly loading = this._loading.asReadonly();
 
@@ -26,6 +27,12 @@ export class ProductService {
   addToCart(sku: string) {
     this._products.update((products) =>
       products.map((p) => (p.sku === sku ? { ...p, addedToCart: true } : p))
+    );
+  }
+
+  removeFromCart(sku: string) {
+    this._products.update((products) =>
+      products.map((p) => (p.sku === sku ? { ...p, addedToCart: false } : p))
     );
   }
 }

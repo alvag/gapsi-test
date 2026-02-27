@@ -1,0 +1,32 @@
+<div
+  class="cart"
+  cdkDropList
+  id="cart-drop-zone"
+  [cdkDropListData]="items()"
+  [cdkDropListSortingDisabled]="true"
+  (cdkDropListDropped)="onDrop($event)"
+>
+  <div class="cart__header">
+    <div class="cart__icon-wrapper">
+      <i class="fa-solid fa-cart-shopping cart__icon"></i>
+      @if (count() > 0) {
+        <span class="cart__badge">{{ count() }}</span>
+      }
+    </div>
+    <span class="cart__text">Arrastra aquí tus productos</span>
+  </div>
+
+  @if (items().length > 0) {
+    <div class="cart__items">
+      @for (item of items(); track item.sku) {
+        <div class="cart__item">
+          <button class="cart__item-remove" (click)="remove.emit(item.sku)">
+            <i class="fa-solid fa-xmark"></i>
+          </button>
+          <img [src]="'images/products' + item.image" [alt]="item.name" class="cart__item-img" />
+          <span class="cart__item-name">{{ item.name }}</span>
+        </div>
+      }
+    </div>
+  }
+</div>

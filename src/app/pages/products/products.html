@@ -1,0 +1,38 @@
+@if (loading()) {
+  <app-loader [show]="true" />
+} @else {
+  <section class="products">
+    <div class="products__container">
+    <app-drag-and-drop-cart
+      [items]="cartItems()"
+      [count]="cartCount()"
+      (drop)="onAddToCart($event)"
+      (remove)="onRemoveFromCart($event)"
+    />
+    @if (products().length === 0) {
+      <div class="products__empty">
+        <i class="fa-solid fa-box-open products__empty-icon"></i>
+        <p class="products__empty-text">No hay productos disponibles</p>
+      </div>
+    } @else {
+      <cdk-virtual-scroll-viewport
+        [itemSize]="rowHeight"
+        class="products__viewport"
+        cdkDropList
+        id="products-grid"
+        [cdkDropListConnectedTo]="['cart-drop-zone']"
+        [cdkDropListData]="products()"
+        [cdkDropListSortingDisabled]="true"
+      >
+        <div *cdkVirtualFor="let row of productRows()" class="products__row">
+          @for (product of row; track product.sku) {
+            <div cdkDrag [cdkDragData]="product" class="products__cell">
+              <app-product-card [product]="product" (add)="onAddToCart($event)" />
+            </div>
+          }
+        </div>
+      </cdk-virtual-scroll-viewport>
+    }
+    </div>
+  </section>
+}

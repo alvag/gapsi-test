@@ -1,0 +1,19 @@
+<article class="product-card">
+  <div class="product-card__image-wrapper">
+    <img
+      [src]="'images/products' + product().image"
+      [alt]="product().name"
+      class="product-card__image"
+    />
+  </div>
+
+  <div class="product-card__body">
+    <h3 class="product-card__name">{{ product().name }}</h3>
+    <span class="product-card__price">{{ product().price | currency: 'MXN' : 'symbol-narrow' }}</span>
+    <p class="product-card__description">{{ product().description }}</p>
+
+    <button appButton variant="primary" class="product-card__btn" (click)="onAddToCart()">
+      Agregar
+    </button>
+  </div>
+</article>
